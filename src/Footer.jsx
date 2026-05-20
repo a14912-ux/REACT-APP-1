@@ -1,8 +1,10 @@
+import "./Footer.css"
 
 function Footer() {
     return(
-        <div>
-            
+        <div className='footer-center'>
+                    <a href="/home">Home</a>
+                    <a href="/contactos">Contactos</a>
         </div>
     )
 

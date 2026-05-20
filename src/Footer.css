@@ -1,0 +1,18 @@
+.footer-center {
+    font-size: 16px;
+    text-align: center;
+    padding: 3 px 0 px;
+}
+
+.footer-center a{
+color: #fc0;
+text-decoration: none;
+padding: 10px
+
+}
+
+.footer-center a:houver {
+    color:#000;
+    font-weight: Bold;
+
+}
