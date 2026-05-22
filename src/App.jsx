@@ -6,6 +6,9 @@ import './App.css'
 
 import Mensagem from './Mensagem';
 import Alerta from './Alerta';
+import Contador from './Contador';
+import Formulario from './Formulario';
+
 
 
 
@@ -24,14 +27,16 @@ function App() {
         Clica-me!
       </button>
 
+      <Contador />
+
       <h1 className="text-center">Componentes e Props</h1>
       {/* Cada componente recebe props diferentes */}
       <Mensagem mytext="Bem-vindo à tua primeira aplicação React!" />
       <Mensagem mytext="Os componentes permitem reutilizar código!" />
 
 
-      <Alerta mytext="Isto não é facil!" />
-
+      <Alerta tipo="success" texto="Este é uma alerta de sucesso 67!" />
+      <Formulario/>
     </div>
   );
 }
