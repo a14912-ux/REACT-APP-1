@@ -7,8 +7,9 @@ import './App.css'
 import Mensagem from './Mensagem';
 import Alerta from './Alerta';
 import Contador from './Contador';
-import Formulario from './Formulario';
-import Tarefas from './Tarefas';
+//import Formulario from './Formulario';
+//import Tarefas from './Tarefas';
+import Notas from './Notas';
 
 
 function App() {
@@ -35,8 +36,9 @@ function App() {
 
 
       <Alerta tipo="success" texto="Este é uma alerta de sucesso 67!" />
-      <Formulario/>
-      <Tarefas/>
+      <Notas/>
+      {/*<Formulario/>*/}
+      {/*<Tarefas/>*/}
  
     </div>
   );

@@ -11,55 +11,74 @@ function Tarefas() {
 
     const [tarefas, setTarefas] = useState([]);
 
+    // Guarda os dados submetidos (para mostrar depois do envio)
     const [dadosSubmetidos, setDadosSubmetidos] = useState(null);
+
     // Esta função é chamada quando o formulário é submetido
     function handleSubmit(e) {
         e.preventDefault(); // impede o recarregamento da página
         setDadosSubmetidos(formData); // guarda os dados preenchidos
+
+
+        const novaTarefa = {
+            id: Date.now(),
+            titulo: formData.titulo,
+            data: formData.data,
+            descricao: formData.descricao
+        };
+        setTarefas([...tarefas, novaTarefa]);
     }
+
+    function newTarefa() {
+        const novaTarefa = {
+            id: Date.now(),
+            titulo: 'Euzinho',
+            data: 'euzinha',
+            descricao: 'ui ui ui'
+        };
+        setFormData(novaTarefa);
+        setTarefas([...tarefas, novaTarefa]);
+        setDadosSubmetidos(null);
+    }
+
+    function eliminaTarefas() {
+
+        setTarefas([]);
+        setTarefas(tarefas.filter((tarefa) => tarefa.id !== id));
+    }
+
     // Limpa o formulário e os dados apresentados
     function limparFormulario() {
         setFormData({ id: '', titulo: '', data: '', descricao: '' });
         setDadosSubmetidos(null);
     }
 
-    function newTarefa(){
-        const novaTarefa = {
-            id: Date.now(),
-            titulo:'',
-            data:'',
-            descricao:''
-        }
-        setFormData(novaTarefa);
-        setTarefas([...tarefas,novaTarefa]);
-        
-    }
+
 
     return (
         <div className="mt-4 row">
 
+
+
             <div className="col-6">
                 <form onSubmit={handleSubmit}>
-                    {/* Cada campo é controlado — o valor vem do estado React */}
                     <div className="form-group">
                         <label>Titulo</label>
                         <input type="text" className="form-control" value={formData.titulo} onChange={(e) =>
-
                             setFormData({ ...formData, titulo: e.target.value })} required />
                     </div>
+
                     <div className="form-group">
                         <label>Data</label>
                         <input type="date" className="form-control" value={formData.data} onChange={(e) =>
-
                             setFormData({ ...formData, data: e.target.value })} required />
                     </div>
-                    <div className="form-group">
-                        <label>Descricao</label>
-                        <input type="text" className="form-control" value={formData.descricao} onChange={(e) =>
 
+                    <div className="form-group">
+                        <label>Descrição</label>
+                        <input type="text" className="form-control" value={formData.descricao} onChange={(e) =>
                             setFormData({ ...formData, descricao: e.target.value })} />
                     </div>
-                    
 
                     {/* Botões de ação */}
                     <button className="btn btn-success mr-2">Enviar</button>
@@ -67,29 +86,49 @@ function Tarefas() {
                     <button type="button" className="btn btn-outline-secondary"
                         onClick={limparFormulario}>Limpar</button>
 
-                        <button type="button" className="btn btn-outline-secondary"
+                    <button type="button" className="btn btn-outline-secondary"
                         onClick={newTarefa}>Nova Tarefa</button>
+
+                    <button type="button" className="btn btn-danger"
+                        onClick={eliminaTarefas}>Eliminar Tarefas</button>
+
+                    <button type="button" className="btn btn-outline-secondary"
+                        onClick={eliminaTarefas}>Limpar Lista</button>
+
+        
                 </form>
             </div>
 
 
 
 
+
             <div className="col-6">
-
                 {dadosSubmetidos && (
-                <div className="card mt-4">
-                    <div className="card-body">
-                        <h5 className="card-title">Dados Recebidos</h5>
-                        <p><strong>Titulo:</strong> {dadosSubmetidos.titulo}</p>
-                        <p><strong>Data:</strong> {dadosSubmetidos.data}</p>
-                        <p><strong>Descricao:</strong> {dadosSubmetidos.descricao}</p>
+                    <div className="card mt-4">
+                        <div className="card-body">
+                            <h5 className="card-title">Dados Recebidos</h5>
+                            <p><strong>Titulo:</strong> {dadosSubmetidos.titulo}</p>
+                            <p><strong>Data:</strong> {dadosSubmetidos.data}</p>
+                            <p><strong>Descrição:</strong> {dadosSubmetidos.descricao}</p>
+                            
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
 
+                <ul className="list-group mt-4">
+                    {tarefas.map(tarefa => (
+                        <li key={tarefa.id} className="list-group-item">
+                            <h5>{tarefa.titulo}</h5>
+                            <p>{tarefa.data}</p>
+                            <p>{tarefa.descricao}</p>
+                            <button className="btn btn-danger" onClick={() => eliminaTarefa(tarefa.id)}>Eliminar</button>
+
+                            
+                        </li>
+                    ))}
+                </ul>
             </div>
-
         </div>
     );
 }
